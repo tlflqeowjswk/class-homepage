@@ -1,48 +1,180 @@
+/* 전체 기본 설정 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #f7f9ff, #e7ecff);
+  color: #222;
+  min-height: 100vh;
 }
 
-h1 {
-    color: #333;
+/* 페이지 중앙 정렬 */
+.page-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
 }
 
-section {
-    margin-bottom: 20px;
+/* 상단 헤더 */
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.site-title {
+  font-size: 28px;
+  font-weight: 700;
 }
 
-td, th {
-    border: 1px solid #ccc;
-    padding: 8px;
+.site-title span {
+  color: #4c6fff;
 }
-.table-wrapper {
+
+.site-subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+/* 상단 메뉴 */
+.nav-bar {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.nav-pill {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.9);
+  cursor: default;
+}
+
+/* 카드 레이아웃 */
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr;
+  gap: 16px;
+}
+
+/* 공통 카드 스타일 */
+.card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 18px;
+  padding: 16px 18px 18px;
+  box-shadow:
+    0 10px 30px rgba(15, 25, 40, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card h2 {
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card .icon {
+  font-size: 18px;
+}
+
+/* 급식 / 수행 / 공지 리스트 */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.list-item:hover {
+  background: rgba(76, 111, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.list-item .label {
+  font-weight: 500;
+}
+
+.list-item .meta {
+  font-size: 12px;
+  color: #777;
+}
+
+/* 오늘 강조 */
+.today {
+  background: rgba(76, 111, 255, 0.1);
+  color: #1f2a5a;
+}
+
+/* 공지 */
+.notice-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* 아이돌 박스 */
+.idol-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.idol-box img {
   width: 100%;
-  overflow-x: auto;   /* 표가 화면 밖으로 나가면 가로 스크롤로 보이게 */
+  max-width: 260px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
-.table-wrapper table {
-  border-collapse: collapse;
-  width: 100%;
+.idol-box p {
+  font-size: 13px;
+  color: #666;
+  text-align: center;
 }
+
+/* 푸터 */
+footer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: #777;
+  text-align: right;
+}
+
+/* 반응형 (모바일) */
 @media (max-width: 768px) {
-
-  body {
-    font-size: 14px;
-    padding: 0 8px;
+  .page-wrapper {
+    padding: 20px 14px 32px;
   }
 
-  section {
-    width: 100%;
-    margin-bottom: 12px;
+  .main-grid {
+    grid-template-columns: 1fr;
   }
 
-  .table-wrapper table {
-    font-size: 12px;
-    white-space: nowrap;
+  header {
+    margin-bottom: 18px;
   }
 }
