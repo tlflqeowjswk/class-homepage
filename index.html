@@ -1,210 +1,281 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>학급 홈페이지</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>우리 반 학급 홈페이지</title>
 
-    <style>
-        /* 전체 기본 스타일 */
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #f5f5f5;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        header {
-            background: #3f51b5;
-            color: white;
-            padding: 16px 24px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
-        header p {
-            margin: 4px 0 0 0;
-            font-size: 14px;
-            opacity: 0.9;
-        }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f4f6ff, #eef9ff);
+      color: #222;
+    }
 
-        main {
-            max-width: 1000px;
-            margin: 16px auto 32px;
-            padding: 0 16px;
-            display: grid;
-            grid-template-columns: 2fr 2fr;
-            grid-gap: 16px;
-        }
+    /* 헤더 영역 */
+    header {
+      background: linear-gradient(135deg, #3f51b5, #5c6bc0);
+      color: white;
+      padding: 20px 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
 
-        section {
-            background: white;
-            border-radius: 10px;
-            padding: 16px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-        }
-        section h2 {
-            margin-top: 0;
-            font-size: 18px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 8px;
-        }
+    header .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
 
-        /* 급식표 스타일 */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th, td {
-            border-bottom: 1px solid #eee;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background: #f0f0ff;
-        }
-        tr.today {
-            background: #fff9c4;
-            font-weight: 600;
-        }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+    }
 
-        /* 공지 리스트 */
-        .notice-list li {
-            margin-bottom: 6px;
-        }
+    header p {
+      margin: 6px 0 0 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
 
-        /* 전체를 두 줄로 나누기 위해 수행 + 공지 묶음 */
-        .full-row {
-            grid-column: 1 / 3;
-        }
+    /* 메인 레이아웃 */
+    main {
+      max-width: 1100px;
+      margin: 20px auto 32px;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 2fr 2fr;
+      gap: 16px;
+    }
 
-        /* 모바일 대응 */
-        @media (max-width: 768px) {
-            main {
-                grid-template-columns: 1fr;
-            }
-            header {
-                text-align: center;
-            }
-        }
-    </style>
+    /* 카드 공통 스타일 */
+    .card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 18px 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      border-bottom: 1px solid #e0e3ff;
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card h2 span.icon {
+      font-size: 18px;
+    }
+
+    /* 공지사항 카드 전체 너비 */
+    .card.notice {
+      grid-column: 1 / 3;
+    }
+
+    /* 표 영역 공통 */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      min-width: 320px;
+    }
+
+    th, td {
+      border-bottom: 1px solid #e5e5e5;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background: #f1f3ff;
+      font-weight: 600;
+    }
+
+    tr.today {
+      background: #fff7c5;
+      font-weight: 600;
+    }
+
+    /* 공지사항 리스트 */
+    ul.notice-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 8px 0 0 0;
+      font-size: 14px;
+    }
+
+    ul.notice-list li {
+      padding: 4px 0;
+      border-bottom: 1px dashed #e0e0e0;
+    }
+
+    ul.notice-list li:last-child {
+      border-bottom: none;
+    }
+
+    /* 작은 설명 텍스트 */
+    .helper {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* 모바일 화면용 반응형 */
+    @media (max-width: 768px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .card.notice {
+        grid-column: 1 / 2;
+      }
+
+      body {
+        font-size: 14px;
+      }
+
+      table {
+        font-size: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>유성여자고등학교 3-6 홈페이지</h1>
-    <p id="today-text">오늘 날짜</p>
-</header>
+  <!-- 헤더 -->
+  <header>
+    <div class="wrap">
+      <h1> 유성여자고등학교 3-6 학급 홈페이지</h1>
+      <p id="today-text">오늘 날짜</p>
+    </div>
+  </header>
 
-<main>
-    <!-- 급식 정보 -->
-    <section>
-        <h2>이번 주 급식</h2>
+  <!-- 메인 -->
+  <main>
+    <!-- 급식 정보 카드 -->
+    <section class="card">
+      <h2><span class="icon">🍱</span>이번 주 급식</h2>
+      <p class="helper">data-date만 실제 날짜로 바꾸면, 오늘 급식 줄이 자동으로 강조됩니다.</p>
+
+      <div class="table-wrapper">
         <table>
-            <thead>
-                <tr>
-                    <th>날짜</th>
-                    <th>메뉴</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- data-date에 실제 날짜를 넣어두면 JS가 오늘 날짜를 찾아서 강조해 줌 -->
-                <tr data-date="2025-11-18">
-                    <td>11월 18일 (화)</td>
-                    <td>잡곡밥, 미역국, 치킨텐더, 샐러드</td>
-                </tr>
-                <tr data-date="2025-11-19">
-                    <td>11월 19일 (수)</td>
-                    <td>볶음밥, 계란국, 탕수육, 김치</td>
-                </tr>
-                <tr data-date="2025-11-20">
-                    <td>11월 20일 (목)</td>
-                    <td>카레라이스, 콘샐러드, 요플레</td>
-                </tr>
-                <tr data-date="2025-11-21">
-                    <td>11월 21일 (금)</td>
-                    <td>잔치국수, 김밥, 과일</td>
-                </tr>
-            </tbody>
+          <thead>
+          <tr>
+            <th>날짜</th>
+            <th>메뉴</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- data-date를 실제 날짜(YYYY-MM-DD)로 맞춰주세요 -->
+          <tr data-date="2025-11-18">
+            <td>11월 18일 (화)</td>
+            <td>잡곡밥, 미역국, 치킨텐더, 샐러드</td>
+          </tr>
+          <tr data-date="2025-11-19">
+            <td>11월 19일 (수)</td>
+            <td>볶음밥, 계란국, 탕수육, 김치</td>
+          </tr>
+          <tr data-date="2025-11-20">
+            <td>11월 20일 (목)</td>
+            <td>카레라이스, 콘샐러드, 요플레</td>
+          </tr>
+          <tr data-date="2025-11-21">
+            <td>11월 21일 (금)</td>
+            <td>잔치국수, 김밥, 과일</td>
+          </tr>
+          </tbody>
         </table>
+      </div>
     </section>
 
-    <!-- 수행평가 -->
-    <section>
-        <h2>수행평가 일정</h2>
+    <!-- 수행평가 카드 -->
+    <section class="card">
+      <h2><span class="icon">🧾</span>수행평가 일정</h2>
+      <p class="helper">과목·날짜·내용만 바꿔서 사용하면 됩니다.</p>
+
+      <div class="table-wrapper">
         <table>
-            <thead>
-                <tr>
-                    <th>날짜</th>
-                    <th>과목</th>
-                    <th>내용</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-date="2025-11-20">
-                    <td>11월 20일</td>
-                    <td>수학</td>
-                    <td>함수 단원 발표 평가</td>
-                </tr>
-                <tr data-date="2025-11-22">
-                    <td>11월 22일</td>
-                    <td>영어</td>
-                    <td>영어 기사 요약 발표</td>
-                </tr>
-                <tr data-date="2025-11-25">
-                    <td>11월 25일</td>
-                    <td>물리</td>
-                    <td>실험 보고서 제출</td>
-                </tr>
-            </tbody>
+          <thead>
+          <tr>
+            <th>날짜</th>
+            <th>과목</th>
+            <th>내용</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr data-date="2025-11-20">
+            <td>11월 20일</td>
+            <td>수학</td>
+            <td>함수 단원 발표 평가</td>
+          </tr>
+          <tr data-date="2025-11-22">
+            <td>11월 22일</td>
+            <td>영어</td>
+            <td>영어 기사 요약 발표</td>
+          </tr>
+          <tr data-date="2025-11-25">
+            <td>11월 25일</td>
+            <td>물리</td>
+            <td>실험 보고서 제출</td>
+          </tr>
+          </tbody>
         </table>
+      </div>
     </section>
 
-    <!-- 공지사항 (가로 전체 차지) -->
-    <section class="full-row">
-        <h2>공지 사항</h2>
-        <ul class="notice-list">
-            <li>[11월 20일] 모의고사 신청 마감</li>
-            <li>[11월 22일] 자율학습실 자리 배정 변경</li>
-            <li>[11월 25일] 학교 축제 준비 회의 7교시</li>
-        </ul>
+    <!-- 공지사항 카드 (가로 전체) -->
+    <section class="card notice">
+      <h2><span class="icon">📢</span>공지사항</h2>
+      <ul class="notice-list">
+        <li>[11월 20일] 모의고사 신청 마감</li>
+        <li>[11월 22일] 자율학습실 자리 배정 변경</li>
+        <li>[11월 25일] 학교 축제 준비 회의 7교시</li>
+      </ul>
     </section>
-</main>
+  </main>
 
-<script>
-    // 오늘 날짜를 YYYY-MM-DD 형태 문자열로 만들기
+  <script>
+    // 오늘 날짜를 "YYYY-MM-DD" 형식 문자열로 만드는 함수
     function getTodayString() {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, "0");
-        const day = String(now.getDate()).padStart(2, "0");
-        return `${year}-${month}-${day}`;
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
     }
 
-    // 헤더에 오늘 날짜 표시
+    // 헤더에 오늘 날짜 예쁘게 표시
     (function setTodayText() {
-        const now = new Date();
-        const todayText = document.getElementById("today-text");
-        const week = ["일", "월", "화", "수", "목", "금", "토"];
-        todayText.textContent =
-            `${now.getFullYear()}년 ${now.getMonth()+1}월 ${now.getDate()}일 (${week[now.getDay()]}요일)`;
+      const now = new Date();
+      const week = ["일", "월", "화", "수", "목", "금", "토"];
+      const text = `${now.getFullYear()}년 ${now.getMonth() + 1}월 ${now.getDate()}일 (${week[now.getDay()]}요일)`;
+      document.getElementById("today-text").textContent = text;
     })();
 
-    // 급식 / 수행평가 테이블에서 오늘 날짜에 해당하는 행 찾아서 강조
-    (function highlightTodayRow() {
-        const today = getTodayString();
-        const rows = document.querySelectorAll("tr[data-date]");
-        rows.forEach(row => {
-            if (row.getAttribute("data-date") === today) {
-                row.classList.add("today");
-            }
-        });
+    // data-date가 오늘인 행에 today 클래스 붙여서 강조
+    (function highlightToday() {
+      const today = getTodayString();
+      const rows = document.querySelectorAll("tr[data-date]");
+      rows.forEach(row => {
+        if (row.getAttribute("data-date") === today) {
+          row.classList.add("today");
+        }
+      });
     })();
-</script>
+  </script>
 
 </body>
 </html>
