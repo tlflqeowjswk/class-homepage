@@ -20,3 +20,29 @@ td, th {
     border: 1px solid #ccc;
     padding: 8px;
 }
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;   /* 표가 화면 밖으로 나가면 가로 스크롤로 보이게 */
+}
+
+.table-wrapper table {
+  border-collapse: collapse;
+  width: 100%;
+}
+@media (max-width: 768px) {
+
+  body {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  section {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .table-wrapper table {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+}
