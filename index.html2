@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학급 홈페이지</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        /* 모바일에서 글자 겹치는 것 방지 */
+        @media (max-width: 600px) {
+            table { font-size: 14px; }
+        }
+
+        /* 표 가로스크롤 */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        table, td, th {
+            border: 1px solid #aaa;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .today {
+            background: #ffe5b4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>우리반 홈페이지</h1>
+
+    <div class="section">
+        <h2>오늘의 급식</h2>
+        <p id="meal">불러오는 중...</p>
+    </div>
+
+    <div class="section">
+        <h2>수행평가 일정</h2>
+        <div class="table-wrap">
+            <table>
+                <tr><th>과목</th><th>날짜</th><th>내용</th></tr>
+                <tr><td>영어</td><td>2024-11-30</td><td>어휘 테스트</td></tr>
+                <tr><td>수학</td><td class="today">2024-12-01</td><td>단원평가</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>공지사항</h2>
+        <ul>
+            <li>내일 1교시 담임 시간</li>
+            <li>흥인지문 체험학습 준비물</li>
+        </ul>
+    </div>
+
+<script>
+    // 오늘 날짜 강조
+    const today = new Date().toISOString().split("T")[0];
+    const tds = document.querySelectorAll("td");
+
+    tds.forEach(td => {
+        if (td.innerText === today) {
+            td.classList.add("today");
+        }
+    });
+
+    // 급식 자동 표시 (테스트용)
+    document.getElementById("meal").innerText = "김치찌개, 제육볶음, 샐러드";
+</script>
+
+</body>
+</html>
